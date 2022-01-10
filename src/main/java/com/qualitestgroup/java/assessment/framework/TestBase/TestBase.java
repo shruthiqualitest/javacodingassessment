@@ -1,4 +1,4 @@
-package com.qualitestgroup.java.assessment.framework.testbase;
+package com.qualitestgroup.java.assessment.framework.TestBase;
 
 import com.qualitestgroup.java.assessment.framework.utils.Constants;
 import com.qualitestgroup.java.assessment.framework.utils.GlobalVars;
@@ -49,6 +49,4 @@ public class TestBase {
         }
         return prop;
     }
-
-
 }

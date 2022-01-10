@@ -1,5 +1,7 @@
 package com.qualitestgroup.java.assessment.framework.utils;
 
+
+import com.qualitestgroup.java.assessment.framework.TestBase.TestBase;
 import org.openqa.selenium.WebDriver;
 
 import java.util.Properties;
