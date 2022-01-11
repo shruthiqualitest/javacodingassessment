@@ -43,7 +43,7 @@ public class GlobalVars {
 
     }
     public void setApplicationName(String applicationName){
-        this.applicationName= "src/main/resources/PropertyFile/"+applicationName+".properties";
+        this.applicationName= "src/main/resources/com.qualitestgroup.java.assessment.propertyfiles/"+applicationName+".properties";
     }
     public String getApplicationName(){
         return this.applicationName;
