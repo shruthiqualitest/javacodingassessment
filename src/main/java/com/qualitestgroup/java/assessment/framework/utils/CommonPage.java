@@ -126,12 +126,22 @@ public class CommonPage {
            e.printStackTrace();
        }
     }
+    
+    public void scrollToElement(String  element, int timeOut){
+        try {
+            wait = new WebDriverWait(driver, timeOut);
+            wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(element))));
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("arguments[0].scrollIntoView(true);", driver.findElement(By.xpath(element)));
+        }
+        catch (ElementNotVisibleException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void navigateTo(String url){
         driver.manage().window().maximize();
         driver.get(url);
 
     }
-
-
 }
