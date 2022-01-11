@@ -94,6 +94,7 @@ public class DemoPage {
         page.clickElement(elementCard, 20);
         page.clickElement(checkBx, 20);
         page.clickElement(expandbutton, 20);
+        page.scrollToElement(angularChckBx,20);
         page.clickElement(angularChckBx, 20);
 
         String value[] = page.getAttributeValueArray(angularChckBx + svcElement, 20, "class");
@@ -136,6 +137,7 @@ public class DemoPage {
     public boolean validateAlert() {
         boolean isStep = false;
         page.navigateTo(global.getProdUrl());
+        page.scrollToElement(alertCard,20);
         page.clickElement(alertCard, 20);
         page.scrollToElement(alertSection, 20);
         page.clickElement(alertSection, 20);
@@ -147,6 +149,7 @@ public class DemoPage {
     public boolean validateWidgetSection() {
         boolean isStep = false;
         page.navigateTo(global.getProdUrl());
+        page.scrollToElement(widgetCard,20);
         page.clickElement(widgetCard, 20);
         page.scrollToElement(datePickerSection, 20);
         page.clickElement(datePickerSection, 20);
