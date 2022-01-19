@@ -2,6 +2,7 @@ package com.qualitestgroup.java.assessment.test;
 
 import com.qualitestgroup.java.assessment.framework.TestBase.TestBase;
 import com.qualitestgroup.java.assessment.framework.pages.DemoPage;
+import com.sun.org.glassfish.gmbal.Description;
 import org.openqa.selenium.*;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -21,10 +22,9 @@ public class DemoQATest {
     }
 
     @Test
+    @Description("Verify angular check box is selectable or not")
     public void verifyElementsAngularCheckBx() {
-        boolean isStep;
-        isStep = demoPage.angularCheckBox();
-        Assert.assertTrue(isStep, "Not able to change the value for checkbox");
+        Assert.assertTrue(demoPage.isAngularCheckBoxSelectable(), "Fail to check and un-check angular checkbox.");
     }
 
     @AfterClass
