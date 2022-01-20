@@ -6,13 +6,23 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.Properties;
 
+/*
+ * Represents global variables used across tests.
+ */
 public class GlobalVars {
+    private static WebDriver driver;
+    private static  String file;
+    private static String applicationName;
+    private static Properties prop;
+    private static String prodUrl;
+    private static GlobalVars global;
 
-    private WebDriver driver;
-    private String file;
-    private String applicationName;
-    private Properties prop;
-    private String prodUrl;
+    public static GlobalVars getInstance(){
+        if(global==null){
+            global=new GlobalVars();
+        }
+        return global;
+    }
 
     public void setWebDriver(WebDriver driver){
         this.driver = driver;
@@ -28,26 +38,25 @@ public class GlobalVars {
     public String getProdUrl(){
         return prodUrl;
     }
-    public WebDriver getWebDriver(){
 
+    public WebDriver getWebDriver(){
         return driver;
     }
 
-    public void setFilePath(String filepath){
-
-            file = filepath;
-
+    public void setFilePath(String applicationName){
+        file ="src/main/resources/PropertyFile/"+applicationName+".properties";
     }
+
     public String getFilePath(){
         return file;
+    }
 
-    }
     public void setApplicationName(String applicationName){
-        this.applicationName= "src/main/resources/com.qualitestgroup.java.assessment.propertyfiles/"+applicationName+".properties";
+        this.applicationName= applicationName;
     }
+
     public String getApplicationName(){
         return this.applicationName;
     }
-
 }
 

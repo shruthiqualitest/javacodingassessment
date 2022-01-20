@@ -9,17 +9,26 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.Properties;
 
+/**
+ * Placeholder for {@link "www.demoqa.com" DemoQA} web elements
+ */
 public class DemoPage {
-
+    public static DemoPage demo;
     public WebDriver driver;
     public Properties prop;
     public CommonPage page;
     public GlobalVars global;
 
-    public DemoPage(WebDriver driver) {
-        this.driver = driver;
-        global = new GlobalVars();
-        page = new CommonPage(driver);
+    public static DemoPage getInstance(){
+        if(demo==null){
+            demo=new DemoPage();
+        }
+        return demo;
+    }
+    public DemoPage() {
+        global = GlobalVars.getInstance();
+        driver=global.getWebDriver();
+        page = CommonPage.getInstance();
         PageFactory.initElements(driver, this);
         global.setProdURL();
     }

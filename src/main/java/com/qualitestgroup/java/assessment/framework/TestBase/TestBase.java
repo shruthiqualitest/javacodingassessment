@@ -6,14 +6,18 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.annotations.BeforeSuite;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+/**
+ * Base test plan that can be extended by all tests.
+ */
 public class TestBase {
 
-    public WebDriver driver;
+    public static WebDriver driver;
 
     public static Properties prop;
 
@@ -21,8 +25,8 @@ public class TestBase {
 
     public static GlobalVars global;
 
-    public WebDriver getDriver() {
-
+    @BeforeSuite
+    public static void  getDriver() {
         global = new GlobalVars();
         global.setApplicationName(Constants.file);
         global.setFilePath(global.getApplicationName());
@@ -35,7 +39,7 @@ public class TestBase {
             WebDriverManager.firefoxdriver().setup();
             driver = new FirefoxDriver();
         }
-        return driver;
+        global.setWebDriver(driver);
     }
 
     public static Properties getProperties(String filepath) {
@@ -50,3 +54,4 @@ public class TestBase {
         return prop;
     }
 }
+
