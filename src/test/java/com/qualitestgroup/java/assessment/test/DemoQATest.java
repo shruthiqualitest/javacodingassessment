@@ -9,22 +9,18 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class DemoQATest {
-    public WebDriver driver;
-    public TestBase base;
-    public DemoPage demoPage;
+public class DemoQATest extends TestBase {
+    public  DemoPage demoPage;
 
     @BeforeClass
-    public void launch() {
-        base = new TestBase();
-        driver = base.getDriver();
-        demoPage = new DemoPage(driver);
+    public void launch(){
+        demoPage = DemoPage.getInstance();
     }
 
     @Test
     @Description("Verify angular check box is selectable or not")
     public void verifyElementsAngularCheckBx() {
-        Assert.assertTrue(demoPage.isAngularCheckBoxSelectable(), "Fail to check and un-check angular checkbox.");
+        Assert.assertTrue(demoPage.isAngularCheckBoxSelectable(), "Fail to ");
     }
 
     @AfterClass

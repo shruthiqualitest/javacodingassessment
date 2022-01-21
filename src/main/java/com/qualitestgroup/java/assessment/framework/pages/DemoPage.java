@@ -36,12 +36,19 @@ public class DemoPage {
     @FindBy(xpath = "(//ul[@class='menu-list']/li[2])[1]")
     private WebElement checkBoxSection;
 
-    public DemoPage(WebDriver driver) {
-        this.driver = driver;
-        global = new GlobalVars();
-        page = new CommonPage(driver);
+    public DemoPage() {
+        global = GlobalVars.getInstance();
+        driver=global.getWebDriver();
+        page = CommonPage.getInstance();
         PageFactory.initElements(driver, this);
         global.setProdURL();
+    }
+
+    public static DemoPage getInstance() {
+        if (demo == null) {
+            demo = new DemoPage();
+        }
+        return demo;
     }
 
     /**
