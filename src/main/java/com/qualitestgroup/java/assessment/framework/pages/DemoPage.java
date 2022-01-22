@@ -69,57 +69,48 @@ public class DemoPage {
         return isErrorReturned(emailTextBox, "class");
     }
 
-    ///Helper Functions
-    public void selectCard(WebElement element) {
-        scrollToElement(element);
-        clickElement(element);
+    @FindBy(xpath = "//div[@id='currentAddress-wrapper']//textarea")
+    private WebElement txtArea;
+
+    @FindBy(id = "userEmail")
+    private WebElement emailTxtBox;
+
+    @FindBy(xpath = "//div[@id='permanentAddress-wrapper']//textarea")
+    private WebElement addressTxtBox;
+
+    @FindBy(id = "submit")
+    private WebElement submitBtn;
+
+    @FindBy(xpath = "(//ul[@class='menu-list']/li[1])")
+    private WebElement txtBox;
+
+    public DemoPage(WebDriver driver) {
+        this.driver = driver;
+        global = new GlobalVars();
+        page = new CommonPage(driver);
+        PageFactory.initElements(driver, this);
+        global.setProdURL();
     }
 
-    public void openCheckBoxSection(final List<WebElement> checkBoxSection) {
-        clickElement(checkBoxSection.get(0));
-    }
-
-    public void expandCurrentSection(final WebElement expandButton) {
-        clickElement(expandButton);
-    }
-
-    public void selectCard(String element) {
-        scrollToElement(element);
-        clickElement(element);
-    }
-
-    public void scrollToElement(String element){
-        page.scrollToElement(element, 20);
-    }
-
-    public void clickElement(String element){
-        page.clickElement(element, 20);
-    }
-
-    public void navigateToHmePage() {
+    public boolean validateElementCTxtBox() {
+        boolean isStep = false;
         page.navigateTo(global.getProdUrl());
-    }
-    public String getAttributeValue(WebElement element, String attribute){
-        return page.getAttributeValue(element,attribute,20);
-    }
+        page.scrollToElement(elementCard, 30);
+        page.clickElement(elementCard, 20);
+        page.clickElement(txtBox, 20);
+        page.sendKeys(userNameTxt, "John Doe", 20);
+        page.scrollToElement(txtArea, 20);
+        page.sendKeys(txtArea, " 78 Test Str, State, 12345", 20);
+        page.sendKeys(emailTxtBox, "JohnDoe1", 20);
 
-    public void scrollToElement(WebElement element){
-        page.scrollToElement(element, 30);
-    }
-    public void clickElement(WebElement element){
-        page.clickElement(element,20);
-    }
-    public void sendKeysTextBox(WebElement element, String keys){
-        page.sendKeys(element,keys,20);;
-    }
-
-    public void submitForm(final WebElement submitButton){
-        scrollToElement(submitButton);
-        clickElement(submitButton);;
-    }
-
-    public boolean isErrorReturned(WebElement element, String attribute){
-        return getAttributeValue(element,attribute).contains("field-error");
+        page.sendKeys(addressTxtBox, " 78 Test Str, State, 12345", 20);
+        page.scrollToElement(submitBtn, 20);
+        page.clickElement(submitBtn, 20);
+        String error = page.getAttributeValue(emailTxtBox, "class", 20);
+        if (error.contains("field-error")) {
+            isStep = true;
+        }
+        return isStep;
     }
 
     public void terminate(){
