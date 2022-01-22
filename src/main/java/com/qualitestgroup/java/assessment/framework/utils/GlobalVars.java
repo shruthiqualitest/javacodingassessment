@@ -44,7 +44,7 @@ public class GlobalVars {
     }
 
     public void setFilePath(String applicationName){
-        file ="src/main/resources/PropertyFile/"+applicationName+".properties";
+        file ="src/main/resources/com.qualitestgroup.java.assessment.propertyfiles/"+applicationName+".properties";
     }
 
     public String getFilePath(){
