@@ -19,6 +19,15 @@ public class DemoPage {
     public CommonPage page;
     public GlobalVars global;
 
+    @FindBy(css = "div.category-cards > div:nth-child(3)")
+    private WebElement alertCard;
+
+    @FindBy(css = "div.mt-4.row button")
+    private List<WebElement>alertButton;
+
+    @FindBy(css = "#item-1")
+    private List<WebElement> alertSection;
+
     public static DemoPage getInstance(){
         if(demo==null){
             demo=new DemoPage();
@@ -33,6 +42,13 @@ public class DemoPage {
         global.setProdURL();
     }
 
+    public boolean validateAlert() {
+        navigateToHmePage();
+        selectCard(alertCard);
+        selectCard(alertSection.get(1));
+        page.clickElementWithJS(alertButton.get(0), 20);
+        return page.isAlertPresent(20);
+    }
 
     ///Helper Functions
     public void selectCard(WebElement element) {
