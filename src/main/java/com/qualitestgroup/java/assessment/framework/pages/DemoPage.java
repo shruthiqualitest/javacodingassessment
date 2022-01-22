@@ -8,7 +8,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
-import java.util.Properties;
 
 /**
  * Placeholder for {@link "www.demoqa.com" DemoQA} web elements
@@ -19,12 +18,34 @@ public class DemoPage {
     public CommonPage page;
     public GlobalVars global;
 
+    @FindBy(css = "div.category-cards>div")
+    private WebElement elementCard;
+
+    @FindBy(css = "ul.menu-list > li:nth-of-type(1)")
+    private List<WebElement> textBox;
+
+    @FindBy(id = "userName")
+    private WebElement userNameTextBox;
+
+    @FindBy(css = "div#currentAddress-wrapper textarea")
+    private WebElement textArea;
+
+    @FindBy(id = "userEmail")
+    private WebElement emailTextBox;
+
+    @FindBy(css = "div#permanentAddress-wrapper textarea")
+    private WebElement addressTextBox;
+
+    @FindBy(id = "submit")
+    private WebElement submitButton;
+
     public static DemoPage getInstance(){
         if(demo==null){
             demo=new DemoPage();
         }
         return demo;
     }
+
     public DemoPage() {
         global = GlobalVars.getInstance();
         driver=global.getWebDriver();
@@ -33,6 +54,20 @@ public class DemoPage {
         global.setProdURL();
     }
 
+    public boolean validateElementTextBox() {
+
+        navigateToHmePage();
+        selectCard(elementCard);
+        selectCard(textBox.get(0));
+
+        sendKeysTextBox(userNameTextBox,"John Doe");
+        sendKeysTextBox(textArea, " 78 Test Str, State, 12345");
+        sendKeysTextBox(emailTextBox, "JohnDoe1");
+        sendKeysTextBox(addressTextBox, "78 Test Str, State, 12345");
+        submitForm(submitButton);
+
+        return isErrorReturned(emailTextBox, "class");
+    }
 
     ///Helper Functions
     public void selectCard(WebElement element) {
