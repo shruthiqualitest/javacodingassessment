@@ -9,7 +9,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
-import java.util.Properties;
 
 /**
  * Placeholder for {@link "www.demoqa.com" DemoQA} web elements
@@ -17,24 +16,20 @@ import java.util.Properties;
 public class DemoPage {
     public static DemoPage demo;
     public WebDriver driver;
-    public Properties prop;
     public CommonPage page;
     public GlobalVars global;
 
-    @FindBy(xpath = "//div[@class='category-cards']/div")
+    @FindBy(css = "div.category-cards>div")
     private WebElement elementCard;
 
-    @FindBy(xpath = "(//ul[@class='menu-list']/li[2])")
-    private WebElement checkBx;
-
-    @FindBy(xpath = "//div[@class='rct-options']/button")
+    @FindBy(css = "div.rct-options > button")
     private WebElement expandButton;
 
     private static String angularCheckBox = "(//span[@class='rct-checkbox'])[8]";
     String svcElement = "/*[name()='svg']";
 
-    @FindBy(xpath = "(//ul[@class='menu-list']/li[2])[1]")
-    private WebElement checkBoxSection;
+    @FindBy(css="ul.menu-list>li:nth-child(2)")
+    private List<WebElement> checkBoxSection;
 
     public DemoPage() {
         global = GlobalVars.getInstance();
@@ -77,7 +72,7 @@ public class DemoPage {
     }
 
     public void openCheckBoxSection() {
-        clickElement(checkBoxSection);
+        clickElement(checkBoxSection.get(0));
     }
 
     /**
