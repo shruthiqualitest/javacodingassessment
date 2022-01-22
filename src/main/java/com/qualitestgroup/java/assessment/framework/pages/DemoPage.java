@@ -19,6 +19,27 @@ public class DemoPage {
     public CommonPage page;
     public GlobalVars global;
 
+    @FindBy(xpath = "//div[contains(@class,'week')][5]/div[6]")
+    private WebElement dateTimeSelection;
+
+    @FindBy(xpath = "//div[contains(@class,'week')][5]/div[6]")
+    private WebElement dateSelection;
+
+    @FindBy(id = "datePickerMonthYearInput")
+    private WebElement datePicker;
+
+    @FindBy(css= "div.category-cards > div:nth-of-type(4)")
+    private WebElement widgetCard;
+
+    @FindBy(css= "#item-2")
+    private List<WebElement> datePickerSection;
+
+    @FindBy(id = "dateAndTimePickerInput")
+    private WebElement dateTimePicker;
+
+    @FindBy(css="ul[class*=time-list] > li:nth-of-type(2)")
+    private WebElement timeSelection;
+
     public static DemoPage getInstance(){
         if(demo==null){
             demo=new DemoPage();
@@ -33,6 +54,21 @@ public class DemoPage {
         global.setProdURL();
     }
 
+    public boolean validateWidgetSection() {
+        navigateToHmePage();
+        selectCard(widgetCard);
+        selectCard(datePickerSection.get(2));
+        String date =getAttributeValue(datePicker, "value");
+        clickElement(datePicker);
+        clickElement(dateSelection);
+        String changedDate =getAttributeValue(datePicker, "value");
+        String dateNTime = getAttributeValue(dateTimePicker, "value");
+        clickElement(dateTimePicker);
+        clickElement(dateTimeSelection);
+        clickElement(timeSelection);
+        String changedDateNTime = getAttributeValue(dateTimePicker, "value");
+        return !date.equals(changedDate) && !dateNTime.equals(changedDateNTime);
+    }
 
     ///Helper Functions
     public void selectCard(WebElement element) {
